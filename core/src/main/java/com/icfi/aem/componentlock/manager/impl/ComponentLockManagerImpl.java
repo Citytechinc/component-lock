@@ -28,7 +28,9 @@ public class ComponentLockManagerImpl implements ComponentLockManager {
 
     @Override
     public LockPermission getComponentPermissions(String resourceType, String principalId) {
-        Resource resource = resolver.resolve(getConfigurationPath() + "/" + principalId + "/" + resourceType);
+        String path = getConfigurationPath() + "/" + principalId;
+        path = resourceType != null ? path + "/" + resourceType : path;
+        Resource resource = resolver.resolve(path);
         if (resource != null && !ResourceUtil.isNonExistingResource(resource)) {
             String permission = resource.getValueMap().get(JcrProperties.CL_PERMISSION, LockPermission.DEFAULT.name());
             LockPermission lockPermission = LockPermission.fromName(permission);
@@ -39,27 +41,38 @@ public class ComponentLockManagerImpl implements ComponentLockManager {
 
     @Override
     public LockPermission getComponentPermissionsInherited(String resourceType, List<String> principalIds) {
-        LockPermission out = LockPermission.DEFAULT;
         while (resourceType != null) {
-            for (String principalId : principalIds) {
-                Resource resource = resolver.resolve(getConfigurationPath() + "/" + principalId + "/" + resourceType);
-                if (resource != null && !ResourceUtil.isNonExistingResource(resource)) {
-                    String permission =
-                        resource.getValueMap().get(JcrProperties.CL_PERMISSION, LockPermission.DEFAULT.name());
-                    LockPermission lockPermission = LockPermission.fromName(permission);
-                    out = lockPermission != null ? lockPermission : LockPermission.DEFAULT;
-                    if (out != LockPermission.DEFAULT) {
-                        return out;
-                    }
-                }
+            LockPermission lockPermission = checkResourceType(resourceType, principalIds);
+            if (lockPermission != LockPermission.DEFAULT) {
+                return lockPermission;
             }
             resourceType = ResourceUtil.getParent(resourceType);
         }
-        return out;
+        // check the ROOT resource type permission
+        return checkResourceType(null, principalIds);
     }
 
     @Override
     public Map<String, Boolean> getComponentPermissions(String resourceType) {
         return new HashMap<>();
+    }
+
+    private LockPermission checkResourceType(String resourceType, List<String> principalIds) {
+        LockPermission out = LockPermission.DEFAULT;
+        for (String principalId : principalIds) {
+            String path = getConfigurationPath() + "/" + principalId;
+            path = resourceType != null ? path + "/" + resourceType : path;
+            Resource resource = resolver.resolve(path);
+            if (resource != null && !ResourceUtil.isNonExistingResource(resource)) {
+                String permission =
+                    resource.getValueMap().get(JcrProperties.CL_PERMISSION, LockPermission.DEFAULT.name());
+                LockPermission lockPermission = LockPermission.fromName(permission);
+                out = lockPermission != null ? lockPermission : LockPermission.DEFAULT;
+                if (out != LockPermission.DEFAULT) {
+                    return out;
+                }
+            }
+        }
+        return out;
     }
 }

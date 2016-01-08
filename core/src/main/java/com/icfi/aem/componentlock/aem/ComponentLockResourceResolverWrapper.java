@@ -166,4 +166,8 @@ public class ComponentLockResourceResolverWrapper implements ResourceResolver {
         }
         return wrapped.adaptTo(aClass);
     }
+
+    public ResourceResolver getWrapped() {
+        return wrapped;
+    }
 }

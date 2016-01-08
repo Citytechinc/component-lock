@@ -21,7 +21,7 @@
             </div>
 
             <div class="coral-Form-fieldwrapper">
-                <label class="coral-Form-fieldlabel">Filter</label>
+                <label class="coral-Form-fieldlabel">Filter (<span id="cl-console-visible">0</span> of <span id="cl-console-total">0</span>)</label>
                 <span class="coral-DecoratedTextfield js-coral-Autocomplete-field">
                     <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
                     <input class="coral-DecoratedTextfield-input coral-Textfield" type="text" id="cl-console-query" placeholder="Filter">

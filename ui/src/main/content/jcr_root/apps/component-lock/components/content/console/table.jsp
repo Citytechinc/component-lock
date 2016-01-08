@@ -12,6 +12,36 @@
         </tr>
         </thead>
         <tbody>
+        <tr class="coral-Table-row">
+            <td class="coral-Table-cell">${table.rootComponent.resourceType}</td>
+            <td class="coral-Table-cell"></td>
+            <td class="coral-Table-cell">
+                <div class="coral-Selector cl-console-selector">
+                    <label class="coral-Selector-option">
+                        <input class="coral-Selector-input" type="radio" name="clPermission" value="ALLOW" ${cl:isChecked("ALLOW", table.rootComponent.lockPermission)}>
+                            <span class="coral-Selector-description" title="ALLOW">
+                              <i class="coral-Icon coral-Icon--check coral-Selector-icon"></i>
+                                Allow
+                            </span>
+                    </label>
+                    <label class="coral-Selector-option">
+                        <input class="coral-Selector-input" type="radio" name="clPermission" value="DENY" ${cl:isChecked("DENY", table.rootComponent.lockPermission)}>
+                            <span class="coral-Selector-description" title="DENY">
+                              <i class="coral-Icon coral-Icon--close coral-Selector-icon"></i>
+                                Deny
+                            </span>
+                    </label>
+                    <label class="coral-Selector-option">
+                        <input type="hidden" name="clPermission@Delete" />
+                        <input class="coral-Selector-input" type="radio" name="clPermission" value=""  ${cl:isChecked("DEFAULT", table.rootComponent.lockPermission)}>
+                            <span class="coral-Selector-description" title="DEFAULT">
+                              <i class="coral-Icon coral-Icon--arrowUp coral-Selector-icon"></i>
+                                Inherit
+                            </span>
+                    </label>
+                </div>
+            </td>
+        </tr>
         <c:forEach items="${table.components}" var="component">
             <tr class="coral-Table-row">
                 <td class="coral-Table-cell js-query">${component.resourceType}</td>
@@ -33,7 +63,8 @@
                             </span>
                         </label>
                         <label class="coral-Selector-option">
-                            <input class="coral-Selector-input" type="radio" name="${component.resourceType}/clPermission" value="DEFAULT" ${cl:isChecked("DEFAULT", component.lockPermission)}>
+                            <input type="hidden" name="${component.resourceType}/clPermission@Delete" />
+                            <input class="coral-Selector-input" type="radio" name="${component.resourceType}/clPermission" value="" ${cl:isChecked("DEFAULT", component.lockPermission)}>
                             <span class="coral-Selector-description" title="DEFAULT">
                               <i class="coral-Icon coral-Icon--arrowUp coral-Selector-icon"></i>
                                 Inherit

@@ -2,10 +2,12 @@ package com.icfi.aem.componentlock.components.content;
 
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
+import com.icfi.aem.componentlock.aem.ComponentLockResourceResolverWrapper;
 import com.icfi.aem.componentlock.manager.ComponentLockManager;
 import com.icfi.aem.componentlock.manager.impl.ComponentLockManagerImpl;
 import com.icfi.aem.componentlock.model.LockPermission;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.models.annotations.Model;
 
@@ -20,6 +22,7 @@ public class ComponentTable {
     private final String userId;
     private final ComponentManager componentManager;
     private final ComponentLockManager componentLockManager;
+    private final ComponentData rootComponent;
 
     private final Map<String, ComponentData> components = new TreeMap<>();
 
@@ -28,8 +31,16 @@ public class ComponentTable {
             throw new IllegalArgumentException("Component table requires a user/group id selector");
         }
         userId = request.getRequestPathInfo().getSelectors()[1];
-        componentManager = request.getResourceResolver().adaptTo(ComponentManager.class);
-        componentLockManager = request.getResourceResolver().adaptTo(ComponentLockManagerImpl.class);
+        ResourceResolver resolver = request.getResourceResolver();
+        if (resolver instanceof ComponentLockResourceResolverWrapper) {
+            resolver = ((ComponentLockResourceResolverWrapper) resolver).getWrapped();
+        }
+        componentManager = resolver.adaptTo(ComponentManager.class);
+        componentLockManager = resolver.adaptTo(ComponentLockManagerImpl.class);
+
+        rootComponent = new ComponentData("[ROOT]");
+        rootComponent.setLockPermission(componentLockManager.getComponentPermissions(null, userId));
+
         for (Component component: componentManager.getComponents()) {
             String resourceType = component.getResourceType();
             ComponentData componentData = components.get(resourceType);
@@ -66,6 +77,10 @@ public class ComponentTable {
 
     public List<ComponentData> getComponents() {
         return new ArrayList<>(components.values());
+    }
+
+    public ComponentData getRootComponent() {
+        return rootComponent;
     }
 
     public static final class ComponentData implements Comparable<ComponentData> {
