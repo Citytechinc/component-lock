@@ -1,0 +1,9 @@
+.cl-console-selector {
+    white-space: nowrap;
+}
+#cl-console {
+    margin: 15px;
+}
+.endor-Page-content {
+    overflow-y: scroll;
+}

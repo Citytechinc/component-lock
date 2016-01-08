@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>cl</short-name>
+    <uri>http://www.icfi.com/aem/cl/functions/1.0</uri>
+
+    <function>
+        <description>
+            Converts a when values are equal, renders 'checked="checked"' for radio options
+        </description>
+        <name>isChecked</name>
+        <function-class>com.icfi.aem.componentlock.util.JspUtil</function-class>
+        <function-signature>java.lang.String isChecked(java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+</taglib>
