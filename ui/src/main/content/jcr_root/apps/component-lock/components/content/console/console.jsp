@@ -28,7 +28,7 @@
                 </span>
                 <label class="coral-Switch" id="cl-console-toggle-field">
                     <input class="coral-Switch-input" id="cl-console-toggle-default" type="checkbox">
-                    <span class="coral-Switch-offLabel"> All</span><span class="coral-Switch-onLabel">Hide&nbsp;Default</span>
+                    <span class="coral-Switch-offLabel"> All</span><span class="coral-Switch-onLabel">Hide&nbsp;Inherited</span>
                 </label>
                 <span id="cl-console-wait-indicator" class="waitIndicator"><i class="coral-Wait"></i> <span class="loadingText">Loading...</span><span class="filteringText">Filtering...</span></span>
             </div>

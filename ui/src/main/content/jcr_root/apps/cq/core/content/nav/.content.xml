@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+    jcr:primaryType="nt:unstructured">
+    <tools jcr:primaryType="nt:unstructured">
+        <acs-commons/>
+        <operations jcr:primaryType="nt:unstructured">
+            <security jcr:primaryType="nt:unstructured">
+                <component-lock
+                    jcr:description="Manage component editing permissions"
+                    jcr:mixinTypes="[rep:AccessControllable]"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Component Lock"
+                    href="/component-lock.html"
+                    id="component-lock">
+                    <rep:policy/>
+                </component-lock>
+            </security>
+        </operations>
+    </tools>
+</jcr:root>
