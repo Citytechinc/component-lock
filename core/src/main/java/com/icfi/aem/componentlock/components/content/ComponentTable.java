@@ -3,8 +3,9 @@ package com.icfi.aem.componentlock.components.content;
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
 import com.icfi.aem.componentlock.aem.ComponentLockResourceResolverWrapper;
-import com.icfi.aem.componentlock.manager.ComponentLockManager;
-import com.icfi.aem.componentlock.manager.impl.ComponentLockManagerImpl;
+import com.icfi.aem.componentlock.constants.Paths;
+import com.icfi.aem.componentlock.repository.ComponentLockRepository;
+import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;
 import com.icfi.aem.componentlock.model.LockPermission;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -21,7 +22,7 @@ public class ComponentTable {
 
     private final String userId;
     private final ComponentManager componentManager;
-    private final ComponentLockManager componentLockManager;
+    private final ComponentLockRepository lockRepository;
     private final ComponentView rootComponent;
 
     private final Map<String, ComponentView> components = new TreeMap<>();
@@ -36,10 +37,10 @@ public class ComponentTable {
             resolver = ((ComponentLockResourceResolverWrapper) resolver).getWrapped();
         }
         componentManager = resolver.adaptTo(ComponentManager.class);
-        componentLockManager = resolver.adaptTo(ComponentLockManagerImpl.class);
+        lockRepository = resolver.adaptTo(ComponentLockRepositoryImpl.class);
 
         rootComponent = new ComponentView("[ROOT]");
-        rootComponent.setLockPermission(componentLockManager.getComponentPermissions(null, userId));
+        rootComponent.setLockPermission(lockRepository.getComponentPermissions(null, userId));
 
         for (Component component: componentManager.getComponents()) {
             String resourceType = component.getResourceType();
@@ -52,9 +53,8 @@ public class ComponentTable {
             }
             componentView.setComponent(true);
             componentView.setComponentName(component.getProperties().get("jcr:title", String.class));
-            componentView.setComponentGroup(component.getComponentGroup());
             if (componentView.getLockPermission() == null) {
-                componentView.setLockPermission(componentLockManager.getComponentPermissions(resourceType, userId));
+                componentView.setLockPermission(lockRepository.getComponentPermissions(resourceType, userId));
             }
             resourceType = ResourceUtil.getParent(resourceType);
             while (populateAncestors && resourceType != null) {
@@ -64,7 +64,7 @@ public class ComponentTable {
                     components.put(resourceType, componentView);
                 }
                 if (componentView.getLockPermission() == null) {
-                    componentView.setLockPermission(componentLockManager.getComponentPermissions(resourceType, userId));
+                    componentView.setLockPermission(lockRepository.getComponentPermissions(resourceType, userId));
                 }
                 resourceType = ResourceUtil.getParent(resourceType);
             }
@@ -72,7 +72,7 @@ public class ComponentTable {
     }
 
     public String getPostPath() {
-        return componentLockManager.getConfigurationPath();
+        return Paths.COMPONENT_LOCK_ROOT;
     }
 
     public List<ComponentView> getComponents() {
@@ -92,7 +92,6 @@ public class ComponentTable {
         private final String resourceType;
         private boolean isComponent;
         private String componentName;
-        private String componentGroup;
         private LockPermission lockPermission;
 
         private ComponentView(String resourceType) {
@@ -121,14 +120,6 @@ public class ComponentTable {
 
         public void setComponentName(String componentName) {
             this.componentName = componentName;
-        }
-
-        public String getComponentGroup() {
-            return componentGroup;
-        }
-
-        public void setComponentGroup(String componentGroup) {
-            this.componentGroup = componentGroup;
         }
 
         public String getLockPermission() {

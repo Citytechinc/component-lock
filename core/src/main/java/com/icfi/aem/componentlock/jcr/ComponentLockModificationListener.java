@@ -1,5 +1,6 @@
 package com.icfi.aem.componentlock.jcr;
 
+import com.icfi.aem.componentlock.constants.Paths;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Deactivate;
@@ -63,7 +64,7 @@ public class ComponentLockModificationListener implements EventListener {
             session.getWorkspace().getObservationManager().addEventListener(
                 this,
                 EVENTS,
-                "/etc/component-lock",
+                Paths.COMPONENT_LOCK_ROOT,
                 true,
                 null,
                 null,

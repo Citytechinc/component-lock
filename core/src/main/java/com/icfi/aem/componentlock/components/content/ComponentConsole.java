@@ -1,7 +1,6 @@
 package com.icfi.aem.componentlock.components.content;
 
-import com.icfi.aem.componentlock.manager.ComponentLockManager;
-import com.icfi.aem.componentlock.manager.impl.ComponentLockManagerImpl;
+import com.icfi.aem.componentlock.constants.Paths;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.Query;
@@ -18,7 +17,6 @@ import java.util.List;
 public class ComponentConsole {
 
     private final List<Authorizable> authorizables = new ArrayList<>();
-    private final String tableRequestPath;
 
     public ComponentConsole(SlingHttpServletRequest request) {
         JackrabbitSession session = (JackrabbitSession) request.getResourceResolver().adaptTo(Session.class);
@@ -34,9 +32,6 @@ public class ComponentConsole {
         } catch (RepositoryException e) {
             e.printStackTrace();
         }
-        ComponentLockManager componentLockManager =
-            request.getResourceResolver().adaptTo(ComponentLockManagerImpl.class);
-        tableRequestPath = componentLockManager.getConfigurationPath();
     }
 
     public List<Authorizable> getAuthorizables() {
@@ -44,6 +39,6 @@ public class ComponentConsole {
     }
 
     public String getTableRequestPath() {
-        return tableRequestPath;
+        return Paths.COMPONENT_LOCK_ROOT;
     }
 }

@@ -9,7 +9,6 @@ import org.apache.felix.scr.annotations.sling.SlingFilterScope;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.wrappers.SlingHttpServletRequestWrapper;
-import org.apache.sling.commons.osgi.PropertiesUtil;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -38,7 +37,7 @@ public final class ComponentLockRequestFilter implements Filter {
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
         throws IOException, ServletException {
         ServletRequest req = request;
-        if (!disable) { //TODO
+        if (!disable) {
             if (request instanceof SlingHttpServletRequest) {
                 final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
                 req = new RequestWrapper(slingRequest);
@@ -69,6 +68,9 @@ public final class ComponentLockRequestFilter implements Filter {
     @Activate
     @Modified
     protected void modified(Map<String, Object> props) {
-        disable = PropertiesUtil.toBoolean(props.get(DISABLE), false);
+        Object disableProp = props.get(DISABLE);
+        if (disableProp instanceof Boolean) {
+            disable = (boolean) disableProp;
+        }
     }
 }

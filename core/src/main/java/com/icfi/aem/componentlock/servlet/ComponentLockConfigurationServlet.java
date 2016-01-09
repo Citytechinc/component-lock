@@ -44,7 +44,6 @@ public class ComponentLockConfigurationServlet extends SlingAllMethodsServlet {
         String path = rootResource.getPath() + "/" + user;
         Map<String, Object> props = new HashMap<>();
         props.put("jcr:primaryType", "nt:unstructured");
-        props.put("jcr:mixinTypes", "mix:created");
         Resource userResource = resolver.resolve(path);
         if (userResource != null && !ResourceUtil.isNonExistingResource(userResource)) {
             resolver.delete(userResource);
@@ -58,6 +57,7 @@ public class ComponentLockConfigurationServlet extends SlingAllMethodsServlet {
         }
         if (root != null && !root.isEmpty()) {
             userResource.adaptTo(ModifiableValueMap.class).put(JcrProperties.CL_PERMISSION, root);
+            userResource.adaptTo(ModifiableValueMap.class).put("jcr:mixinTypes", "mix:created");
         }
         resolver.commit();
     }

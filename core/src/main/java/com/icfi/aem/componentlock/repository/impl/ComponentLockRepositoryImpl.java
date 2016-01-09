@@ -1,35 +1,28 @@
-package com.icfi.aem.componentlock.manager.impl;
+package com.icfi.aem.componentlock.repository.impl;
 
 import com.icfi.aem.componentlock.constants.JcrProperties;
 import com.icfi.aem.componentlock.constants.Paths;
-import com.icfi.aem.componentlock.manager.ComponentLockManager;
+import com.icfi.aem.componentlock.repository.ComponentLockRepository;
 import com.icfi.aem.componentlock.model.LockPermission;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.models.annotations.Model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Model(adaptables = ResourceResolver.class)
-public class ComponentLockManagerImpl implements ComponentLockManager {
+public class ComponentLockRepositoryImpl implements ComponentLockRepository {
 
     private final ResourceResolver resolver;
 
-    public ComponentLockManagerImpl(ResourceResolver resolver) {
+    public ComponentLockRepositoryImpl(ResourceResolver resolver) {
         this.resolver = resolver;
     }
 
     @Override
-    public String getConfigurationPath() {
-        return Paths.COMPONENT_LOCK_ROOT;
-    }
-
-    @Override
     public LockPermission getComponentPermissions(String resourceType, String principalId) {
-        String path = getConfigurationPath() + "/" + principalId;
+        String path = Paths.COMPONENT_LOCK_ROOT + "/" + principalId;
         path = resourceType != null ? path + "/" + resourceType : path;
         Resource resource = resolver.resolve(path);
         if (resource != null && !ResourceUtil.isNonExistingResource(resource)) {
@@ -53,15 +46,10 @@ public class ComponentLockManagerImpl implements ComponentLockManager {
         return checkResourceType(null, principalIds);
     }
 
-    @Override
-    public Map<String, Boolean> getComponentPermissions(String resourceType) {
-        return new HashMap<>();
-    }
-
     private LockPermission checkResourceType(String resourceType, List<String> principalIds) {
         LockPermission out = LockPermission.DEFAULT;
         for (String principalId : principalIds) {
-            String path = getConfigurationPath() + "/" + principalId;
+            String path = Paths.COMPONENT_LOCK_ROOT + "/" + principalId;
             path = resourceType != null ? path + "/" + resourceType : path;
             Resource resource = resolver.resolve(path);
             if (resource != null && !ResourceUtil.isNonExistingResource(resource)) {

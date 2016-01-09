@@ -2,8 +2,8 @@ package com.icfi.aem.componentlock.aem;
 
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
-import com.icfi.aem.componentlock.manager.ComponentLockManager;
-import com.icfi.aem.componentlock.manager.impl.ComponentLockManagerImpl;
+import com.icfi.aem.componentlock.repository.ComponentLockRepository;
+import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;
 import com.icfi.aem.componentlock.model.LockPermission;
 import com.icfi.aem.componentlock.util.AuthorizableUtil;
 import org.apache.jackrabbit.api.JackrabbitSession;
@@ -21,12 +21,12 @@ import java.util.ListIterator;
 class LockAwareComponentManager implements ComponentManager {
 
     private final ComponentManager wrapped;
-    private final ComponentLockManager lockManager;
+    private final ComponentLockRepository lockManager;
     private final List<String> principalIds;
 
     public LockAwareComponentManager(ResourceResolver resolver) {
         this.wrapped = resolver.adaptTo(ComponentManager.class);
-        this.lockManager = new ComponentLockManagerImpl(resolver);
+        this.lockManager = new ComponentLockRepositoryImpl(resolver);
         JackrabbitSession jSession = (JackrabbitSession) resolver.adaptTo(Session.class);
         Authorizable authorizable = null;
         try {
