@@ -21,7 +21,7 @@ $(document).ready(function() {
             url: baseUrl + '.table.' + user + '.html'
         }).done(function(html) {
             $container.html(html);
-            doQuery($query.val());
+            doQuery($query.val(), $toggle.prop('checked'));
             window.CL.forms.refresh();
             $waitIndicator.toggleClass('loading', false);
         });
