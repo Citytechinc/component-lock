@@ -13,6 +13,7 @@ import java.util.Map;
 public class ComponentLockResourceResolverWrapper implements ResourceResolver {
 
     private final ResourceResolver wrapped;
+    private LockAwareComponentManager cachedLockAwareComponentManager;
 
     public ComponentLockResourceResolverWrapper(ResourceResolver wrapped) {
         this.wrapped = wrapped;
@@ -162,7 +163,10 @@ public class ComponentLockResourceResolverWrapper implements ResourceResolver {
     @Override
     public <AdapterType> AdapterType adaptTo(Class<AdapterType> aClass) {
         if (aClass.isAssignableFrom(ComponentManager.class)) {
-            return (AdapterType) new LockAwareComponentManager(wrapped);
+            if (cachedLockAwareComponentManager == null) {
+                cachedLockAwareComponentManager = new LockAwareComponentManager(wrapped);
+            }
+            return (AdapterType) cachedLockAwareComponentManager;
         }
         return wrapped.adaptTo(aClass);
     }

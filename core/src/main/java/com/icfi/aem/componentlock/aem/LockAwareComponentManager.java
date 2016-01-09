@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
-public class LockAwareComponentManager implements ComponentManager {
+class LockAwareComponentManager implements ComponentManager {
 
     private final ComponentManager wrapped;
     private final ComponentLockManager lockManager;
