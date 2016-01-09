@@ -22,9 +22,9 @@ public class ComponentTable {
     private final String userId;
     private final ComponentManager componentManager;
     private final ComponentLockManager componentLockManager;
-    private final ComponentData rootComponent;
+    private final ComponentView rootComponent;
 
-    private final Map<String, ComponentData> components = new TreeMap<>();
+    private final Map<String, ComponentView> components = new TreeMap<>();
 
     public ComponentTable(SlingHttpServletRequest request) {
         if (request.getRequestPathInfo().getSelectors().length < 2) {
@@ -38,33 +38,33 @@ public class ComponentTable {
         componentManager = resolver.adaptTo(ComponentManager.class);
         componentLockManager = resolver.adaptTo(ComponentLockManagerImpl.class);
 
-        rootComponent = new ComponentData("[ROOT]");
+        rootComponent = new ComponentView("[ROOT]");
         rootComponent.setLockPermission(componentLockManager.getComponentPermissions(null, userId));
 
         for (Component component: componentManager.getComponents()) {
             String resourceType = component.getResourceType();
-            ComponentData componentData = components.get(resourceType);
+            ComponentView componentView = components.get(resourceType);
             boolean populateAncestors = false;
-            if (componentData == null) {
-                componentData = new ComponentData(resourceType);
-                components.put(resourceType, componentData);
+            if (componentView == null) {
+                componentView = new ComponentView(resourceType);
+                components.put(resourceType, componentView);
                 populateAncestors = true;
             }
-            componentData.setComponent(true);
-            componentData.setComponentName(component.getProperties().get("jcr:title", String.class));
-            componentData.setComponentGroup(component.getComponentGroup());
-            if (componentData.getLockPermission() == null) {
-                componentData.setLockPermission(componentLockManager.getComponentPermissions(resourceType, userId));
+            componentView.setComponent(true);
+            componentView.setComponentName(component.getProperties().get("jcr:title", String.class));
+            componentView.setComponentGroup(component.getComponentGroup());
+            if (componentView.getLockPermission() == null) {
+                componentView.setLockPermission(componentLockManager.getComponentPermissions(resourceType, userId));
             }
             resourceType = ResourceUtil.getParent(resourceType);
             while (populateAncestors && resourceType != null) {
-                componentData = components.get(resourceType);
-                if (componentData == null) {
-                    componentData = new ComponentData(resourceType);
-                    components.put(resourceType, componentData);
+                componentView = components.get(resourceType);
+                if (componentView == null) {
+                    componentView = new ComponentView(resourceType);
+                    components.put(resourceType, componentView);
                 }
-                if (componentData.getLockPermission() == null) {
-                    componentData.setLockPermission(componentLockManager.getComponentPermissions(resourceType, userId));
+                if (componentView.getLockPermission() == null) {
+                    componentView.setLockPermission(componentLockManager.getComponentPermissions(resourceType, userId));
                 }
                 resourceType = ResourceUtil.getParent(resourceType);
             }
@@ -75,15 +75,15 @@ public class ComponentTable {
         return componentLockManager.getConfigurationPath() + "/" + userId;
     }
 
-    public List<ComponentData> getComponents() {
+    public List<ComponentView> getComponents() {
         return new ArrayList<>(components.values());
     }
 
-    public ComponentData getRootComponent() {
+    public ComponentView getRootComponent() {
         return rootComponent;
     }
 
-    public static final class ComponentData implements Comparable<ComponentData> {
+    public static final class ComponentView implements Comparable<ComponentView> {
 
         private final String resourceType;
         private boolean isComponent;
@@ -91,12 +91,12 @@ public class ComponentTable {
         private String componentGroup;
         private LockPermission lockPermission;
 
-        private ComponentData(String resourceType) {
+        private ComponentView(String resourceType) {
             this.resourceType = resourceType;
         }
 
         public String getResourceType() {
-            return resourceType;
+            return resourceType.replaceAll("/", "&#8203;/");
         }
 
         public boolean isComponent() {
@@ -132,7 +132,7 @@ public class ComponentTable {
         }
 
         @Override
-        public int compareTo(ComponentData o) {
+        public int compareTo(ComponentView o) {
             return this.resourceType == null ? -1 : this.resourceType.compareTo(o.resourceType);
         }
     }
