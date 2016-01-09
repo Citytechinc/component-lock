@@ -1,6 +1,7 @@
 package com.icfi.aem.componentlock.manager.impl;
 
 import com.icfi.aem.componentlock.constants.JcrProperties;
+import com.icfi.aem.componentlock.constants.Paths;
 import com.icfi.aem.componentlock.manager.ComponentLockManager;
 import com.icfi.aem.componentlock.model.LockPermission;
 import org.apache.sling.api.resource.Resource;
@@ -23,7 +24,7 @@ public class ComponentLockManagerImpl implements ComponentLockManager {
 
     @Override
     public String getConfigurationPath() {
-        return "/etc/component-lock";
+        return Paths.COMPONENT_LOCK_ROOT;
     }
 
     @Override

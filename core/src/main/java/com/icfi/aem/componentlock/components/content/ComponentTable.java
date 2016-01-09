@@ -72,7 +72,7 @@ public class ComponentTable {
     }
 
     public String getPostPath() {
-        return componentLockManager.getConfigurationPath() + "/" + userId;
+        return componentLockManager.getConfigurationPath();
     }
 
     public List<ComponentView> getComponents() {
@@ -81,6 +81,10 @@ public class ComponentTable {
 
     public ComponentView getRootComponent() {
         return rootComponent;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public static final class ComponentView implements Comparable<ComponentView> {
@@ -96,6 +100,10 @@ public class ComponentTable {
         }
 
         public String getResourceType() {
+            return resourceType;
+        }
+
+        public String getResourceTypeWrapping() {
             return resourceType.replaceAll("/", "&#8203;/");
         }
 
