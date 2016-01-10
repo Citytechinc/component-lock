@@ -27,7 +27,7 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>jcr_root/apps/component-lock/install.author</outputDirectory>
+            <outputDirectory>jcr_root/apps/component-lock/install.author    </outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
