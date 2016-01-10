@@ -1,4 +1,5 @@
 #base=js
+namespace.js
 query-2.1.4.min.js
 underscore.min.js
 forms.js

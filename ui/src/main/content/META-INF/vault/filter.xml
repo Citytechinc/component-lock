@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
     <filter root="/apps/component-lock" />
+    <filter root="/apps/wcm/core/content/siteadmin" mode="merge" />
     <filter root="/etc/clientlibs/component-lock" />
     <filter root="/etc/component-lock" mode="merge" />
     <filter root="/apps/cq/core/content/nav/tools/operations/security/component-lock" />

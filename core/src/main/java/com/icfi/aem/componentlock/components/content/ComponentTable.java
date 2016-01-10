@@ -2,7 +2,7 @@ package com.icfi.aem.componentlock.components.content;
 
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
-import com.icfi.aem.componentlock.aem.ComponentLockResourceResolverWrapper;
+import com.icfi.aem.componentlock.sling.ComponentLockResourceResolverWrapper;
 import com.icfi.aem.componentlock.constants.Paths;
 import com.icfi.aem.componentlock.repository.ComponentLockRepository;
 import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;

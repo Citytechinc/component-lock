@@ -2,23 +2,20 @@ package com.icfi.aem.componentlock.aem;
 
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
+import com.icfi.aem.componentlock.model.LockPermission;
 import com.icfi.aem.componentlock.repository.ComponentLockRepository;
 import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;
-import com.icfi.aem.componentlock.model.LockPermission;
 import com.icfi.aem.componentlock.util.AuthorizableUtil;
-import org.apache.jackrabbit.api.JackrabbitSession;
-import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
-class LockAwareComponentManager implements ComponentManager {
+public class LockAwareComponentManager implements ComponentManager {
 
     private final ComponentManager wrapped;
     private final ComponentLockRepository lockManager;
@@ -27,11 +24,8 @@ class LockAwareComponentManager implements ComponentManager {
     public LockAwareComponentManager(ResourceResolver resolver) {
         this.wrapped = resolver.adaptTo(ComponentManager.class);
         this.lockManager = new ComponentLockRepositoryImpl(resolver);
-        JackrabbitSession jSession = (JackrabbitSession) resolver.adaptTo(Session.class);
-        Authorizable authorizable = null;
         try {
-            authorizable = jSession.getUserManager().getAuthorizable(jSession.getUserID());
-            principalIds = AuthorizableUtil.getPrincipalIds(authorizable);
+            principalIds = AuthorizableUtil.getPrincipalIds(resolver);
         } catch (RepositoryException e) {
             throw new IllegalStateException(e); //TODO
         }

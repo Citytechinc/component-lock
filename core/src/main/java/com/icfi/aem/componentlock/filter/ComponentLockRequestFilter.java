@@ -1,6 +1,6 @@
 package com.icfi.aem.componentlock.filter;
 
-import com.icfi.aem.componentlock.aem.ComponentLockResourceResolverWrapper;
+import com.icfi.aem.componentlock.sling.ComponentLockResourceResolverWrapper;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Modified;
 import org.apache.felix.scr.annotations.Property;

@@ -1,6 +1,7 @@
-package com.icfi.aem.componentlock.aem;
+package com.icfi.aem.componentlock.sling;
 
 import com.day.cq.wcm.api.components.ComponentManager;
+import com.icfi.aem.componentlock.aem.LockAwareComponentManager;
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
