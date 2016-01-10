@@ -21,8 +21,6 @@ import java.util.TreeMap;
 public class ComponentTable {
 
     private final String userId;
-    private final ComponentManager componentManager;
-    private final ComponentLockRepository lockRepository;
     private final ComponentView rootComponent;
 
     private final Map<String, ComponentView> components = new TreeMap<>();
@@ -36,8 +34,8 @@ public class ComponentTable {
         if (resolver instanceof ComponentLockResourceResolverWrapper) {
             resolver = ((ComponentLockResourceResolverWrapper) resolver).getWrapped();
         }
-        componentManager = resolver.adaptTo(ComponentManager.class);
-        lockRepository = resolver.adaptTo(ComponentLockRepositoryImpl.class);
+        ComponentManager componentManager = resolver.adaptTo(ComponentManager.class);
+        ComponentLockRepository lockRepository = resolver.adaptTo(ComponentLockRepositoryImpl.class);
 
         rootComponent = new ComponentView("[ROOT]");
         rootComponent.setLockPermission(lockRepository.getComponentPermissions(null, userId));
