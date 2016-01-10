@@ -5,7 +5,6 @@ import com.adobe.granite.ui.components.Config;
 import com.adobe.granite.ui.components.rendercondition.RenderCondition;
 import com.icfi.aem.componentlock.model.LockPermission;
 import com.icfi.aem.componentlock.repository.ComponentLockRepository;
-import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;
 import com.icfi.aem.componentlock.util.AuthorizableUtil;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -23,7 +22,7 @@ public class ComponentLockRenderCondition implements RenderCondition {
 
     public ComponentLockRenderCondition(SlingHttpServletRequest request, ComponentHelper componentHelper) {
         ResourceResolver resolver = request.getResourceResolver();
-        ComponentLockRepository lockRepository = resolver.adaptTo(ComponentLockRepositoryImpl.class);
+        ComponentLockRepository lockRepository = resolver.adaptTo(ComponentLockRepository.class);
         try {
             List<String> principalIds = AuthorizableUtil.getPrincipalIds(resolver);
             Config cfg = componentHelper.getConfig();

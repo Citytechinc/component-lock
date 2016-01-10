@@ -3,7 +3,6 @@ package com.icfi.aem.componentlock.aem;
 import com.day.cq.commons.ListInfoProvider;
 import com.icfi.aem.componentlock.model.LockPermission;
 import com.icfi.aem.componentlock.repository.ComponentLockRepository;
-import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;
 import com.icfi.aem.componentlock.util.AuthorizableUtil;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
@@ -41,7 +40,7 @@ public class ComponentLockInfoProvider implements ListInfoProvider {
         throws JSONException {
 
         ResourceResolver resolver = request.getResourceResolver();
-        ComponentLockRepository lockRepository = resolver.adaptTo(ComponentLockRepositoryImpl.class);
+        ComponentLockRepository lockRepository = resolver.adaptTo(ComponentLockRepository.class);
         String resourceType = resource.getResourceType();
         if ("cq:Page".equals(resourceType)) {
             Resource pageContent = resource.getChild("jcr:content");

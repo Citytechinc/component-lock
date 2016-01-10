@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
     <filter root="/apps/component-lock" />
+    <filter root="/apps/cq/gui/components/authoring/pagestatus" />
     <filter root="/apps/wcm/core/content/siteadmin" mode="merge" />
     <filter root="/apps/wcm/core/content/sites/properties/jcr:content/body/content/header/items/default/items/edit/rendercondition" />
     <filter root="/etc/clientlibs/component-lock" />

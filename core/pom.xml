@@ -43,7 +43,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,com.icfi.aem.componentlock.*</Export-Package>
+                        <Export-Package>com.icfi.aem.componentlock.*</Export-Package>
                         <Sling-Model-Packages>com.icfi.aem.componentlock</Sling-Model-Packages>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>

@@ -2,11 +2,10 @@ package com.icfi.aem.componentlock.components.content;
 
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
-import com.icfi.aem.componentlock.sling.ComponentLockResourceResolverWrapper;
 import com.icfi.aem.componentlock.constants.Paths;
-import com.icfi.aem.componentlock.repository.ComponentLockRepository;
-import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;
 import com.icfi.aem.componentlock.model.LockPermission;
+import com.icfi.aem.componentlock.repository.ComponentLockRepository;
+import com.icfi.aem.componentlock.sling.ComponentLockResourceResolverWrapper;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
@@ -35,7 +34,7 @@ public class ComponentTable {
             resolver = ((ComponentLockResourceResolverWrapper) resolver).getWrapped();
         }
         ComponentManager componentManager = resolver.adaptTo(ComponentManager.class);
-        ComponentLockRepository lockRepository = resolver.adaptTo(ComponentLockRepositoryImpl.class);
+        ComponentLockRepository lockRepository = resolver.adaptTo(ComponentLockRepository.class);
 
         rootComponent = new ComponentView("[ROOT]");
         rootComponent.setLockPermission(lockRepository.getComponentPermissions(null, userId));

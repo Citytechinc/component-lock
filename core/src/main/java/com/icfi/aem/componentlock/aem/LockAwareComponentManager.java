@@ -4,7 +4,6 @@ import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
 import com.icfi.aem.componentlock.model.LockPermission;
 import com.icfi.aem.componentlock.repository.ComponentLockRepository;
-import com.icfi.aem.componentlock.repository.impl.ComponentLockRepositoryImpl;
 import com.icfi.aem.componentlock.util.AuthorizableUtil;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -23,7 +22,7 @@ public class LockAwareComponentManager implements ComponentManager {
 
     public LockAwareComponentManager(ResourceResolver resolver) {
         this.wrapped = resolver.adaptTo(ComponentManager.class);
-        this.lockManager = new ComponentLockRepositoryImpl(resolver);
+        this.lockManager = new ComponentLockRepository(resolver);
         try {
             principalIds = AuthorizableUtil.getPrincipalIds(resolver);
         } catch (RepositoryException e) {
