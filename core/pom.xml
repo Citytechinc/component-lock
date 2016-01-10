@@ -146,6 +146,11 @@
             <artifactId>cq-commons</artifactId>
             <version>5.7.12</version>
         </dependency>
+        <dependency>
+            <groupId>com.adobe.granite</groupId>
+            <artifactId>com.adobe.granite.ui.commons</artifactId>
+            <version>5.5.154</version>
+        </dependency>
 
     </dependencies>
 
