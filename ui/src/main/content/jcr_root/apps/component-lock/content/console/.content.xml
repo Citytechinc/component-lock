@@ -13,7 +13,7 @@
             sling:redirect="false"
             sling:resourceType="granite/ui/components/foundation/page"
             sling:vanityOrder="1200"
-            sling:vanityPath="/component-lock.html">
+            sling:vanityPath="/component-lock">
         <head jcr:primaryType="nt:unstructured">
             <contentchecker
                     jcr:primaryType="nt:unstructured"

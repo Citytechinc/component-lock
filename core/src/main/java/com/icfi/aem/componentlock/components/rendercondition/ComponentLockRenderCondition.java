@@ -17,6 +17,11 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A RenderCondition implementation that blocks rendering for a users that lack authoring permissions.  This component
+ * evaluates the "path" property as EL, resolves the resource at the resulting path, and looks up its resource type. If
+ * the current user does not have authoring permissions for that resource type, rendering is blocked.
+ */
 @Model(adaptables = SlingHttpServletRequest.class)
 public class ComponentLockRenderCondition implements RenderCondition {
 

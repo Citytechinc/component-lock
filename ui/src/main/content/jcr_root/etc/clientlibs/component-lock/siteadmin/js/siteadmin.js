@@ -1,5 +1,10 @@
 window.CL.siteadmin = {
 
+    /**
+     * A condition that prevents editing properties on denied page types.
+     * This condition is specified at /apps/wcm/core/content/siteadmin/actions/properties
+     * @returns {boolean}
+     */
     canEditProperties: function() {
         var grid = CQ.wcm.SiteAdmin.getActiveGrid();
         if (grid) {

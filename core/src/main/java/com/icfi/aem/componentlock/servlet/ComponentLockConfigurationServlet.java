@@ -17,6 +17,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The servlet responsible for writing component lock data from the console.  This implementation is used instead of
+ * Sling POST in order to create a sparse tree (only ALLOW and DENY nodes, and their ancestors).
+ */
 @SlingServlet(resourceTypes = "apps/component-lock/data-root", methods = "POST")
 public class ComponentLockConfigurationServlet extends SlingAllMethodsServlet {
 

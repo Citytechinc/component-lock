@@ -14,6 +14,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * A custom ComponentManager implementation that restricts the view of components based on the effective component lock
+ * configuration for a particular user.  This implementation is injected via ComponentLockResourceResolverWrapper into
+ * the AEM internals that support authoring functionality.  The end result is that only allowed components will appear
+ * as editable in AEM.
+ */
 public class LockAwareComponentManager implements ComponentManager {
 
     private final ComponentManager wrapped;

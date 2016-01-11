@@ -20,7 +20,8 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Request Filter responsible for injecting the LockAwareComponentManager
+ * Request Filter responsible for injecting the LockAwareComponentManager via ComponentLockResourceResolverWrapper.
+ * This filter must be placed in front of the WCMComponentFilter.
  */
 @SlingFilter(label = "Component Lock: Request Filter", scope = SlingFilterScope.REQUEST, order = 20, metatype = true)
 public final class ComponentLockRequestFilter implements Filter {

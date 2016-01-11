@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * A resource resolver implementation responsible for injecting the LockAwareComponentManager into AEM.  This
+ * implementation is injected into each SlingHttpServletRequest via the ComponentLockRequestFilter.
+ */
 public class ComponentLockResourceResolverWrapper implements ResourceResolver {
 
     private final ResourceResolver wrapped;

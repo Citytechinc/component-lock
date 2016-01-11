@@ -16,6 +16,11 @@ import org.apache.sling.commons.json.JSONObject;
 import javax.jcr.RepositoryException;
 import java.util.List;
 
+/**
+ * An info provider that decorates page info used by AEM siteadmin with lock status for the user and page resource type.
+ * JS injected into siteadmin uses this date to selectively disable page property dialogs for pages that the user cannot
+ * edit.
+ */
 @Service
 @Component(immediate = true)
 public class ComponentLockInfoProvider implements ListInfoProvider {

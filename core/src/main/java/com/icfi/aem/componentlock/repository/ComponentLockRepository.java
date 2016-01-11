@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The repository responsible for providing component lock data. Adapted from a resource resolver, the resulting
+ * repository instance will provide data specific to the underlying JCR session's user.
+ */
 @Model(adaptables = ResourceResolver.class)
 public class ComponentLockRepository {
 

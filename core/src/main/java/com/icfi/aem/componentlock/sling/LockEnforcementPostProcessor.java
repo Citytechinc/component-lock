@@ -12,6 +12,11 @@ import org.apache.sling.servlets.post.SlingPostProcessor;
 
 import java.util.List;
 
+/**
+ * A Sling POST Processor that verifies that users modifying content via Sling POST have appropriate permissions for
+ * any component being modified.  When attempting to modify a component type for which the user has insufficient
+ * permissions, an exception will be thrown, preventing commit of the changes.
+ */
 @Service
 @Component
 public class LockEnforcementPostProcessor implements SlingPostProcessor {

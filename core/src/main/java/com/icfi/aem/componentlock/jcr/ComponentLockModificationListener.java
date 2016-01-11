@@ -20,6 +20,9 @@ import javax.servlet.Servlet;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * A JCR listener that clears AEM's cache of component data when the component lock configuration is updated.
+ */
 @Component(immediate = true)
 @Service
 public class ComponentLockModificationListener implements EventListener {
