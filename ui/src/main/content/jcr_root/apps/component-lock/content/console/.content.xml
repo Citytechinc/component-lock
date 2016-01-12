@@ -11,16 +11,8 @@
             jcr:primaryType="nt:unstructured"
             jcr:title="Component Lock"
             sling:redirect="false"
-            sling:resourceType="granite/ui/components/foundation/page"
-            sling:vanityOrder="1200"
-            sling:vanityPath="/component-lock">
+            sling:resourceType="granite/ui/components/foundation/page">
         <head jcr:primaryType="nt:unstructured">
-            <contentchecker
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/admin/contentchecker"
-                    alowEmpty="false"
-                    path="${requestPathInfo.suffix}"
-                    redirect="/component-lock.html"/>
             <viewport
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
