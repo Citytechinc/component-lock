@@ -7,7 +7,7 @@
     <groupId>com.icfi.aem.componentlock</groupId>
     <artifactId>componentlock</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>core</module>
         <module>ui</module>
