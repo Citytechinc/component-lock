@@ -1,7 +1,6 @@
 
 $(document).ready(function() {
 
-    window.CL = window.CL || {};
     window.CL.forms = window.CL.forms || {};
     window.CL.forms.refresh = function() {
 

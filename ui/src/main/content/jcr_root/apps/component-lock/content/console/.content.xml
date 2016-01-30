@@ -1,313 +1,243 @@
-<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0"
-          xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0"
           xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:rep="internal"
+          jcr:mixinTypes="[rep:AccessControllable]"
           jcr:primaryType="cq:Page">
     <jcr:content
+            jcr:mixinTypes="[]"
             jcr:primaryType="nt:unstructured"
             jcr:title="Component Lock"
             sling:redirect="false"
-            sling:resourceType="granite/ui/components/foundation/page"
-            sling:vanityOrder="1200"
-            sling:vanityPath="/component-lock">
+            sling:resourceType="granite/ui/components/foundation/page">
         <head jcr:primaryType="nt:unstructured">
-            <contentchecker jcr:primaryType="nt:unstructured"
-                            alowEmpty="false"
-                            path="${requestPathInfo.suffix}"
-                            redirect="/projects.html"
-                            sling:resourceType="granite/ui/components/foundation/admin/contentchecker"/>
-            <viewport jcr:primaryType="nt:unstructured"
-                      sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
-            <meta jcr:primaryType="nt:unstructured"
-                  content="chrome=1"
-                  name="X-UA-Compatible"
-                  sling:resourceType="granite/ui/components/foundation/meta"/>
-            <title jcr:primaryType="nt:unstructured"
-                   jcr:title="Component Lock Console"
-                   sling:resourceType="cq/gui/components/projects/admin/page/title"/>
-            <favicon jcr:primaryType="nt:unstructured"
-                     sling:resourceType="granite/ui/components/foundation/page/favicon"/>
-            <clientlibs jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/foundation/includeclientlibs"
-                        categories="[granite.ui.foundation,granite.ui.foundation.admin,cq.projects.admin,cq.projects.admin.history.timeline,cq.gui.siteadmin.admin.pages,component-lock.console]"/>
+            <viewport
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+            <meta
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/meta"
+                    content="chrome=1"
+                    name="X-UA-Compatible"/>
+            <title
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Component Lock"
+                    sling:resourceType="cq/gui/components/projects/admin/page/title"/>
+            <favicon
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+            <clientlibs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                    categories="[granite.ui.foundation,granite.ui.foundation.admin,cq.projects.admin,cq.projects.admin.history.timeline,cq.gui.siteadmin.admin.pages,component-lock.console]"/>
         </head>
-        <body jcr:primaryType="nt:unstructured"
-              sling:resourceType="granite/ui/components/foundation/page/body">
-            <layout jcr:primaryType="nt:unstructured"
+        <body
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/page/body">
+            <layout
+                    jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/endor/layouts/page"/>
-            <rail jcr:primaryType="nt:unstructured"
-                  currentId="component-lock-console"
-                  sling:resourceType="granite/ui/components/endor/navcolumns"
-                  srcPath="cq/core/content/nav"/>
-            <breadcrumbs jcr:primaryType="nt:unstructured"
-                         sling:resourceType="cq/gui/components/projects/admin/endor/breadcrumbs"/>
-            <title jcr:primaryType="nt:unstructured"
-                   jcr:title="Component Lock Console"
-                   sling:resourceType="cq/gui/components/projects/admin/endor/title"/>
-            <helpactivator jcr:primaryType="nt:unstructured"
-                           href="#help-popover"
-                           sling:resourceType="granite/ui/components/foundation/hyperlink"
-                           text="Help"
-                           toggle="popover"/>
-            <badge jcr:primaryType="nt:unstructured"
-                   href="#cq-notifications"
-                   sling:resourceType="cq/gui/components/endor/badge"/>
-            <user jcr:primaryType="nt:unstructured"
-                  href="#granite-user-properties"
-                  sling:resourceType="granite/ui/components/endor/user"/>
-            <help jcr:primaryType="nt:unstructured"
-                  id="help-popover"
-                  sling:resourceType="granite/ui/components/foundation/container">
-                <layout jcr:primaryType="nt:unstructured"
+            <rail
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/endor/navcolumns"
+                    currentId="component-lock"
+                    srcPath="cq/core/content/nav"/>
+            <breadcrumbs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/gui/components/projects/admin/endor/breadcrumbs"/>
+            <title
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Component Lock"
+                    sling:resourceType="cq/gui/components/projects/admin/endor/title"/>
+            <helpactivator
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/hyperlink"
+                    href="#help-popover"
+                    text="Help"
+                    toggle="popover"/>
+            <badge
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/gui/components/endor/badge"
+                    href="#cq-notifications"/>
+            <user
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/endor/user"
+                    href="#granite-user-properties"/>
+            <help
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container"
+                    id="help-popover">
+                <layout
+                        jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/layouts/popover"/>
                 <items jcr:primaryType="nt:unstructured">
-                    <list jcr:primaryType="nt:unstructured"
-                          sling:resourceType="granite/ui/components/foundation/container">
-                        <layout jcr:primaryType="nt:unstructured"
+                    <list
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container">
+                        <layout
+                                jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/layouts/list"/>
                         <items jcr:primaryType="nt:unstructured">
-                            <searchform jcr:primaryType="nt:unstructured"
-                                        action="http://www.adobe.com/cfusion/search/index.cfm"
-                                        sling:resourceType="granite/ui/components/foundation/form">
-                                <layout jcr:primaryType="nt:unstructured"
+                            <searchform
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/form"
+                                    action="http://www.adobe.com/cfusion/search/index.cfm">
+                                <layout
+                                        jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/layouts/form"/>
                                 <items jcr:primaryType="nt:unstructured">
-                                    <section jcr:primaryType="nt:unstructured"
-                                             name="siteSection"
-                                             sling:resourceType="granite/ui/components/foundation/form/hidden"
-                                             value="marketing-cloud.html"/>
-                                    <term jcr:primaryType="nt:unstructured"
-                                          emptyText="Search"
-                                          name="term"
-                                          sling:resourceType="granite/ui/components/foundation/form/textfield"/>
+                                    <section
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/form/hidden"
+                                            name="siteSection"
+                                            value="marketing-cloud.html"/>
+                                    <term
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                            emptyText="Search"
+                                            name="term"/>
                                 </items>
                             </searchform>
-                            <whatsnew jcr:primaryType="nt:unstructured"
-                                      href_i18n="https://microsite.omniture.com/t2/help/en_US/whatsnew/"
-                                      sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                      text="What's New">
-                                <layoutConfig jcr:primaryType="nt:unstructured"
-                                              interactive="true"/>
-                            </whatsnew>
-                            <aemdoc jcr:primaryType="nt:unstructured"
-                                    href_i18n="https://www.adobe.com/go/aem6_docs"
+                            <whatsnew
+                                    jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                    href_i18n="https://microsite.omniture.com/t2/help/en_US/whatsnew/"
+                                    text="What's New">
+                                <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        interactive="true"/>
+                            </whatsnew>
+                            <aemdoc
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                    href_i18n="https://www.adobe.com/go/aem6_docs"
                                     text="Documentation">
-                                <layoutConfig jcr:primaryType="nt:unstructured"
-                                              interactive="true"/>
+                                <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        interactive="true"/>
                             </aemdoc>
-                            <home jcr:primaryType="nt:unstructured"
-                                  href_i18n="http://microsite.omniture.com/t2/help/en_US/home/"
-                                  sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                  text="Help Home">
-                                <layoutConfig jcr:primaryType="nt:unstructured"
-                                              interactive="true"/>
+                            <home
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                    href_i18n="http://microsite.omniture.com/t2/help/en_US/home/"
+                                    text="Help Home">
+                                <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        interactive="true"/>
                             </home>
-                            <community jcr:primaryType="nt:unstructured"
-                                       href_i18n="http://helpx.adobe.com/marketing-cloud.html"
-                                       sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                       text="Community">
-                                <layoutConfig jcr:primaryType="nt:unstructured"
-                                              interactive="true"/>
+                            <community
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                    href_i18n="http://helpx.adobe.com/marketing-cloud.html"
+                                    text="Community">
+                                <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        interactive="true"/>
                             </community>
-                            <customercare jcr:primaryType="nt:unstructured"
-                                          href_i18n="http://helpx.adobe.com/marketing-cloud/contact-support.html"
-                                          sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                          text="Customer Care">
-                                <layoutConfig jcr:primaryType="nt:unstructured"
-                                              interactive="true"/>
+                            <customercare
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                    href_i18n="http://helpx.adobe.com/marketing-cloud/contact-support.html"
+                                    text="Customer Care">
+                                <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        interactive="true"/>
                             </customercare>
                         </items>
                     </list>
                 </items>
             </help>
-            <notifications jcr:primaryType="nt:unstructured"
-                           id="cq-notifications"
-                           sling:resourceType="cq/gui/components/endor/notifications"/>
-            <account jcr:primaryType="nt:unstructured"
-                     path="granite/ui/content/userproperties"
-                     sling:resourceType="granite/ui/components/foundation/include"/>
-            <content jcr:primaryType="nt:unstructured"
-                     sling:resourceType="granite/ui/components/foundation/container">
-                <layout jcr:primaryType="nt:unstructured"
+            <notifications
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/gui/components/endor/notifications"
+                    id="cq-notifications"/>
+            <account
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/include"
+                    path="granite/ui/content/userproperties"/>
+            <content
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                        jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/endor/layouts/content"/>
-                <aside jcr:primaryType="nt:unstructured"
-                       sling:resourceType="granite/ui/components/foundation/container">
-                    <layout jcr:primaryType="nt:unstructured"
+                <aside
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/container">
+                    <layout
+                            jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/endor/layouts/sidepanels"/>
                     <items jcr:primaryType="nt:unstructured">
-                        <timeline jcr:primaryType="nt:unstructured"
-                                  id="cq-rail-timeline"
-                                  sling:resourceType="cq/gui/components/common/admin/timeline">
+                        <timeline
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="cq/gui/components/common/admin/timeline"
+                                id="cq-rail-timeline">
                             <items jcr:primaryType="nt:unstructured">
-                                <alerts jcr:primaryType="nt:unstructured"
+                                <alerts
+                                        jcr:primaryType="nt:unstructured"
                                         sling:resourceType="cq/gui/components/common/admin/timeline/alerts">
                                     <items jcr:primaryType="nt:unstructured">
-                                        <workflows jcr:primaryType="nt:unstructured"
-                                                   sling:resourceType="cq/gui/components/common/admin/timeline/alerts/workflow"/>
+                                        <workflows
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="cq/gui/components/common/admin/timeline/alerts/workflow"/>
                                     </items>
                                 </alerts>
-                                <filter jcr:primaryType="nt:unstructured"
+                                <filter
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/form/select"
                                         class="cq-common-admin-timeline-filter"
                                         emptyText="Recently used"
                                         noWidth="true"
                                         rel="cq-common-admin-timeline-filter"
-                                        sling:resourceType="granite/ui/components/foundation/form/select"
                                         text="Recently used">
                                     <items jcr:primaryType="nt:unstructured">
-                                        <default jcr:primaryType="nt:unstructured"
-                                                 sling:resourceType="granite/ui/components/foundation/form/option"
-                                                 text="Recently used"
-                                                 value="all"/>
-                                        <view jcr:primaryType="nt:unstructured"
-                                              sling:resourceType="granite/ui/components/foundation/form/option"
-                                              text="Last viewed"
-                                              value="history:VIEW"/>
-                                        <edit jcr:primaryType="nt:unstructured"
-                                              sling:resourceType="granite/ui/components/foundation/form/option"
-                                              text="Last edited"
-                                              value="history:EDIT"/>
+                                        <default
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/option"
+                                                text="Recently used"
+                                                value="all"/>
+                                        <view
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/option"
+                                                text="Last viewed"
+                                                value="history:VIEW"/>
+                                        <edit
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/option"
+                                                text="Last edited"
+                                                value="history:EDIT"/>
                                     </items>
                                 </filter>
-                                <events jcr:primaryType="nt:unstructured"
+                                <events
+                                        jcr:primaryType="nt:unstructured"
                                         sling:resourceType="cq/gui/components/common/admin/timeline/events">
                                     <notifications jcr:primaryType="nt:unstructured">
-                                        <empty jcr:primaryType="nt:unstructured"
-                                               jcr:title="Select a project to display its timeline."/>
-                                        <unavailable jcr:primaryType="nt:unstructured"
-                                                     jcr:title="The timeline is not available for project details."/>
+                                        <empty
+                                                jcr:primaryType="nt:unstructured"
+                                                jcr:title="Select a project to display its timeline."/>
+                                        <unavailable
+                                                jcr:primaryType="nt:unstructured"
+                                                jcr:title="The timeline is not available for project details."/>
                                     </notifications>
                                     <providers jcr:primaryType="nt:unstructured">
-                                        <history jcr:primaryType="nt:unstructured"
-                                                 filter="history"
-                                                 name="com.adobe.cq.projects.impl.history.ProjectHistoryTimelineEventProvider$1"
-                                                 sling:resourceType="cq/gui/components/projects/admin/historytimeline"/>
+                                        <history
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="cq/gui/components/projects/admin/historytimeline"
+                                                filter="history"
+                                                name="com.adobe.cq.projects.impl.history.ProjectHistoryTimelineEventProvider$1"/>
                                     </providers>
                                 </events>
                             </items>
                         </timeline>
                     </items>
                 </aside>
-                <!--
-                <header jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/foundation/container">
-                    <layout jcr:primaryType="nt:unstructured"
-                            group="cq-projects-admin-projects"
-                            sling:resourceType="granite/ui/components/foundation/layouts/mode"/>
-                    <items jcr:primaryType="nt:unstructured">
-                        <default jcr:primaryType="nt:unstructured"
-                                 sling:resourceType="granite/ui/components/foundation/navigation">
-                            <layout jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
-                            <items jcr:primaryType="nt:unstructured">
-                                <timeline jcr:primaryType="nt:unstructured"
-                                          class="cq-common-admin-timeline-activator cq-common-admin-navigationpanel-changemode"
-                                          foundation-mode-group="cq-projects-admin-projects"
-                                          foundation-mode-value="selection"
-                                          icon="icon-clock"
-                                          sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
-                                          targetId="cq-rail-timeline"
-                                          text="Timeline"
-                                          title="Timeline"/>
-                                <toggleselectionmode jcr:primaryType="nt:unstructured"
-                                                     class="foundation-mode-change"
-                                                     foundation-mode-group="cq-projects-admin-projects"
-                                                     foundation-mode-value="selection"
-                                                     hideText="true"
-                                                     icon="icon-check-circle"
-                                                     sling:resourceType="granite/ui/components/endor/actionbar/button"
-                                                     text="Enter Selection Mode"
-                                                     title="Enter Selection Mode"/>
-                                <create jcr:primaryType="nt:unstructured"
-                                        allowEmptySuffix="true"
-                                        hideText="true"
-                                        href="/libs/cq/core/content/projects/wizard/newproject.html"
-                                        icon="icon-add"
-                                        id="create-pulldown"
-                                        itemscope="itemscope"
-                                        rel="cq-projects-admin-create"
-                                        sling:resourceType="granite/ui/components/endor/actionbar/hyperlink"
-                                        text="Create"
-                                        title="Create">
-                                    <rendercondition jcr:primaryType="nt:unstructured"
-                                                     path="/content/projects"
-                                                     privileges="jcr:addChildNodes"
-                                                     sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"/>
-                                </create>
-                                <showGraph jcr:primaryType="nt:unstructured"
-                                           align="right"
-                                           hideText="true"
-                                           icon="icon-graphBarVertical"
-                                           rel="cq-projects-show-graphs"
-                                           sling:resourceType="granite/ui/components/endor/actionbar/hyperlink"
-                                           text="Show Statistics View"
-                                           title="Show Statistics View">
-                                    <layoutConfig jcr:primaryType="nt:unstructured"
-                                                  align="right"/>
-                                </showGraph>
-                                <filterActiveProjects jcr:primaryType="nt:unstructured"
-                                                      align="right"
-                                                      hideText="true"
-                                                      icon="icon-filterCheck"
-                                                      rel="cq-projects-toggle-active"
-                                                      sling:resourceType="granite/ui/components/endor/actionbar/hyperlink"
-                                                      text="Toggle Active Projects"
-                                                      title="Toggle Active Projects">
-                                    <layoutConfig jcr:primaryType="nt:unstructured"
-                                                  align="right"/>
-                                </filterActiveProjects>
-                            </items>
-                        </default>
-                        <selection jcr:primaryType="nt:unstructured"
-                                   sling:resourceType="granite/ui/components/foundation/navigation">
-                            <layout jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
-                            <items jcr:primaryType="nt:unstructured">
-                                <timeline jcr:primaryType="nt:unstructured"
-                                          class="cq-common-admin-timeline-activator"
-                                          icon="icon-clock"
-                                          sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
-                                          targetId="cq-rail-timeline"
-                                          text="Timeline"
-                                          title="Timeline"/>
-                                <toggleselectionmode jcr:primaryType="nt:unstructured"
-                                                     active="true"
-                                                     class="foundation-mode-change"
-                                                     foundation-mode-group="cq-projects-admin-projects"
-                                                     foundation-mode-value="default"
-                                                     icon="icon-close-circle active"
-                                                     sling:resourceType="granite/ui/components/endor/actionbar/button"
-                                                     text="Exit Selection Mode"
-                                                     title="Exit Selection Mode"/>
-                                <viewproperties jcr:primaryType="nt:unstructured"
-                                                class="foundation-collection-action foundation-admin-properties-activator"
-                                                foundation-admin-properties-activator-action="foundation.normal"
-                                                foundation-collection-action="{"
-                                                target": ".cq-projects-admin-projects", "activeSelectionCount":
-                                "single"}" href="/libs/cq/core/content/projects/properties.html" icon="icon-info-circle"
-                                sling:resourceType="granite/ui/components/endor/actionbar/button" text="View Properties"
-                                title="View Properties"/>
-                                <deleteproject jcr:primaryType="nt:unstructured"
-                                               class="foundation-collection-action"
-                                               foundation-collection-action="{"
-                                               target": ".cq-projects-admin-projects", "activeSelectionCount":
-                                "multiple"}" hideText="true" href="#deleteproject" icon="icon-delete"
-                                rel="cq-projects-admin-actions-delete-activator"
-                                sling:resourceType="granite/ui/components/endor/actionbar/hyperlink" text="Delete"
-                                title="Delete" toggle="modal"/>
-                                <selectionstatus jcr:primaryType="nt:unstructured"
-                                                 sling:resourceType="granite/ui/components/endor/actionbar/selectionstatus"
-                                                 target=".cq-projects-admin-projects">
-                                    <layoutConfig jcr:primaryType="nt:unstructured"
-                                                  align="right"/>
-                                </selectionstatus>
-                            </items>
-                        </selection>
-                    </items>
-                </header>
-                -->
-                <content jcr:primaryType="nt:unstructured"
-                         sling:resourceType="component-lock/components/content/console"/>
+                <content
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="component-lock/components/content/console"/>
             </content>
         </body>
     </jcr:content>
+    <rep:policy/>
 </jcr:root>

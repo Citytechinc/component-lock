@@ -1,6 +1,7 @@
-package com.icfi.aem.componentlock.aem;
+package com.icfi.aem.componentlock.sling;
 
 import com.day.cq.wcm.api.components.ComponentManager;
+import com.icfi.aem.componentlock.aem.LockAwareComponentManager;
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
@@ -10,9 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * A resource resolver implementation responsible for injecting the LockAwareComponentManager into AEM.  This
+ * implementation is injected into each SlingHttpServletRequest via the ComponentLockRequestFilter.
+ */
 public class ComponentLockResourceResolverWrapper implements ResourceResolver {
 
     private final ResourceResolver wrapped;
+    private LockAwareComponentManager cachedLockAwareComponentManager;
 
     public ComponentLockResourceResolverWrapper(ResourceResolver wrapped) {
         this.wrapped = wrapped;
@@ -162,8 +168,15 @@ public class ComponentLockResourceResolverWrapper implements ResourceResolver {
     @Override
     public <AdapterType> AdapterType adaptTo(Class<AdapterType> aClass) {
         if (aClass.isAssignableFrom(ComponentManager.class)) {
-            return (AdapterType) new LockAwareComponentManager(wrapped);
+            if (cachedLockAwareComponentManager == null) {
+                cachedLockAwareComponentManager = new LockAwareComponentManager(wrapped);
+            }
+            return (AdapterType) cachedLockAwareComponentManager;
         }
         return wrapped.adaptTo(aClass);
+    }
+
+    public ResourceResolver getWrapped() {
+        return wrapped;
     }
 }

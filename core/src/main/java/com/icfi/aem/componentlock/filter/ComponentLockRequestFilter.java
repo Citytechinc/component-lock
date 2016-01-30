@@ -1,6 +1,9 @@
 package com.icfi.aem.componentlock.filter;
 
-import com.icfi.aem.componentlock.aem.ComponentLockResourceResolverWrapper;
+import com.icfi.aem.componentlock.sling.ComponentLockResourceResolverWrapper;
+import org.apache.felix.scr.annotations.Activate;
+import org.apache.felix.scr.annotations.Modified;
+import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.sling.SlingFilter;
 import org.apache.felix.scr.annotations.sling.SlingFilterScope;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -14,12 +17,18 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
- * Request Filter responsible for injecting the LockAwareComponentManager
+ * Request Filter responsible for injecting the LockAwareComponentManager via ComponentLockResourceResolverWrapper.
+ * This filter must be placed in front of the WCMComponentFilter.
  */
-@SlingFilter(scope = SlingFilterScope.REQUEST, order = Integer.MAX_VALUE)
+@SlingFilter(label = "Component Lock: Request Filter", scope = SlingFilterScope.REQUEST, order = 20, metatype = true)
 public final class ComponentLockRequestFilter implements Filter {
+
+    @Property(label = "Disable", boolValue = false)
+    private static final String DISABLE = "service.disable";
+    private boolean disable;
 
     @Override
     public void init(final FilterConfig filterConfig) {
@@ -28,12 +37,14 @@ public final class ComponentLockRequestFilter implements Filter {
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
         throws IOException, ServletException {
-        ServletRequest out = request;
-        if (request instanceof SlingHttpServletRequest) {
-            final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
-            out = new RequestWrapper(slingRequest);
+        ServletRequest req = request;
+        if (!disable) {
+            if (request instanceof SlingHttpServletRequest) {
+                final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
+                req = new RequestWrapper(slingRequest);
+            }
         }
-        chain.doFilter(out, response);
+        chain.doFilter(req, response);
     }
 
     @Override
@@ -52,6 +63,15 @@ public final class ComponentLockRequestFilter implements Filter {
         @Override
         public ResourceResolver getResourceResolver() {
             return wrapped;
+        }
+    }
+
+    @Activate
+    @Modified
+    protected void modified(Map<String, Object> props) {
+        Object disableProp = props.get(DISABLE);
+        if (disableProp instanceof Boolean) {
+            disable = (boolean) disableProp;
         }
     }
 }

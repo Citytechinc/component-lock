@@ -27,11 +27,11 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>jcr_root/apps/component-lock/install</outputDirectory>
+            <outputDirectory>jcr_root/apps/component-lock/install.author</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.icfi.aem:component-lock-core</include>
+                <include>com.icfi.aem.componentlock:component-lock-core</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>

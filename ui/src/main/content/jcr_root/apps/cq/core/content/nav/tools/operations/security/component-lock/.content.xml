@@ -2,6 +2,6 @@
        xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
        jcr:primaryType="nt:unstructured"
        href="/apps/component-lock/content/console.html"
-       id="component-lock-console"
+       id="component-lock"
        jcr:description="Manage component editing permissions"
        jcr:title="Component Lock"/>

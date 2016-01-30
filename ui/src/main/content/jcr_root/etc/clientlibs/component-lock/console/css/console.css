@@ -1,9 +1,74 @@
-.cl-console-selector {
-    white-space: nowrap;
-}
-#cl-console {
-    margin: 15px;
+#cl-console-header {
+    padding: 15px;
+    position: fixed;
+    background: #eee;
+    height: 86px;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid #ddd;
 }
 .endor-Page-content {
     overflow-y: scroll;
+}
+#cl-console-header div.headerFieldRow {
+    margin-bottom: 0.5rem;
+}
+#cl-console-header div.headerFieldRow:last-child {
+    margin-bottom: 0;
+}
+.coral-SelectList {
+    max-height: 300px;
+}
+.selectIcon {
+    margin-top: -10px;
+}
+.cl-console-field {
+    width: 300px;
+}
+#cl-console-toggle-field {
+    margin: 10px 30px;
+}
+.waitIndicator i.coral-Wait {
+    margin-right: 10px;
+}
+.waitIndicator, .loadingText, .filteringText {
+    display: none;
+}
+.waitIndicator.loading, .waitIndicator.loading span.loadingText {
+    display: inline-block;
+}
+.waitIndicator.filtering, .waitIndicator.filtering span.filteringText {
+    display: inline-block;
+}
+#cl-console-table-container {
+    padding: 116px 20px 20px 20px;
+}
+.cl-console-permissions-table {
+    margin-top: 15px;
+}
+.cl-console-permissions-table th.resourceType {
+    width: 60%;
+}
+.cl-console-permissions-table th.component {
+    width: 20%;
+}
+.cl-console-permissions-table tr.rootRow {
+    background-color: #ffffff;
+}
+.cl-console-permissions-table tr.ancestorRow {
+    background-color: #f4f4f4;
+}
+.cl-console-permissions-table td.indent-wrap {
+    padding-left: 2.5em;
+    text-indent: -1.5em;
+}
+.cl-console-selector {
+    white-space: nowrap;
+    margin-top: 5px;
+}
+.denyOption .coral-Selector-input:checked + .coral-Selector-description {
+    background: #f0e0e0;
+}
+.allowOption .coral-Selector-input:checked + .coral-Selector-description {
+    background: #e0f0e0;
 }
